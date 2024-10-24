@@ -10,9 +10,11 @@ public class calculatorPanel implements ActionListener{
     private JButton add, subtract, multiply, divide, modulo, equal;
     private JButton zero, one, two, three, four, five, six, seven, eight, nine;
     private String key="";
-    private double total;
-    private double variable1, variable2, variable3;
+    private double total=0;
+    private double variable1, variable3;
+    private String variable2;
     private double sum;
+    private int count=0;
 
     public static void main(String[] args) {
         calculatorPanel myCode = new calculatorPanel();
@@ -91,38 +93,66 @@ public class calculatorPanel implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(e.getActionCommand());
+        System.out.println("key clicked "+e.getActionCommand());
         key = e.getActionCommand();
         textBox.setText(key);
-        double total = Double.parseDouble(key);
-        variable1 = total;
-        if (key.equals("+") || key.equals("-") || key.equals("x") || key.equals("÷") || key.equals("%") || key.equals("=")) {
-            variable2 = total;
-        }else variable3 = total;
 
-        if (key.equals("+")){
-            sum = variable1 + variable3;
-        }
-        if (key.equals("-")){
-            sum = variable1 - variable3;
-        }
-        if (key.equals("x")){
-            sum = variable1 * variable3;
-        }
-        if (key.equals("÷")){
-            sum = variable1 / variable3;
-        }
-        if (key.equals("%")){
-            sum = variable1 % variable3;
+
+        if (key.equals("=")) {
+            textBox.setText(Double.toString(variable1));
+            variable1 = 0;
+            variable3 = 0;
+
+        } else {
+            if (key.equals("0") || key.equals("1") || key.equals("2") || key.equals("3") || key.equals("4") || key.equals("5") || key.equals("6") || key.equals("7") || key.equals("8") || key.equals("9")) {
+                total = Double.parseDouble(key);
+                count += 1;
+            }
+
+            if (key.equals("+") || key.equals("-") || key.equals("x") || key.equals("÷") || key.equals("%")) {
+                variable2 = key;
+            } else {
+                if (count == 1) {
+                    variable1 = total;
+                } else {
+                    variable3 = total;
+
+                    if (variable2.equals("+")) {
+                        sum = variable1 + variable3;
+                    }
+                    if (variable2.equals("-")) {
+                        sum = variable1 - variable3;
+                    }
+                    if (variable2.equals("x")) {
+                        sum = variable1 * variable3;
+                    }
+                    if (variable2.equals("÷")) {
+                        sum = variable1 / variable3;
+                    }
+                    if (variable2.equals("%")) {
+                        sum = variable1 % variable3;
+                    }
+
+                    variable1 = sum;
+                    variable3 = 0;
+                }
+            }
+
+
         }
 
-        System.out.println(variable1);
-        System.out.println(variable2);
 
-//        total += key;
-//        test = (double)test;
-//        textBox.setText(total);
 
+            System.out.println("calculation");
+            System.out.println(variable1);
+            System.out.println(variable2);
+            System.out.println(variable3);
+//            System.out.println(sum);
+
+
+
+
+        }
     }
-}
+
 
