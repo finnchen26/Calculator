@@ -102,11 +102,12 @@ public class calculatorPanel implements ActionListener{
             textBox.setText(Double.toString(variable1));
             variable1 = 0;
             variable3 = 0;
-
+            variable2="";
+            count = 0;
         } else {
             if (key.equals("0") || key.equals("1") || key.equals("2") || key.equals("3") || key.equals("4") || key.equals("5") || key.equals("6") || key.equals("7") || key.equals("8") || key.equals("9")) {
                 total = Double.parseDouble(key);
-                count += 1;
+                count ++;
             }
 
             if (key.equals("+") || key.equals("-") || key.equals("x") || key.equals("÷") || key.equals("%")) {
@@ -132,23 +133,13 @@ public class calculatorPanel implements ActionListener{
                     if (variable2.equals("%")) {
                         sum = variable1 % variable3;
                     }
-
+                    System.out.println("calculation: " + variable1 + variable2 + variable3);
                     variable1 = sum;
                     variable3 = 0;
                 }
             }
-
-
         }
-
-
-
-            System.out.println("calculation");
-            System.out.println(variable1);
-            System.out.println(variable2);
-            System.out.println(variable3);
-//            System.out.println(sum);
-
+        //System.out.println("calculation: " + variable1 + variable2 + variable3);
 
 
 
